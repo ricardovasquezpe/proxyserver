@@ -11,15 +11,39 @@ app.get('/version', async (req, res) => {
 });
 
 app.post('/', async (req, res) => {
-    var response = await axios.post(req.query.url, req.body);
-    res.send(response.data);
+    try {
+        var h = {};
+        if(req.headers.tokenagenda){
+            h = {
+                tokenAgenda: req.headers.tokenagenda
+            };
+        }
+
+        var response = await axios.post(req.query.url, req.body, {
+            headers: h
+        });
+        res.send(response.data);
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 app.get('/', async (req, res) => {
-    var response = await axios.get(req.query.url, {
-        headers: req.headers
-    });
-    res.send(response.data);
+    try {
+        var h = {};
+        if(req.headers.tokenagenda){
+            h = {
+                tokenAgenda: req.headers.tokenagenda
+            };
+        }
+
+        var response = await axios.get(req.query.url, {
+            headers: h
+        });
+        res.send(response.data);
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 app.listen(8080);
