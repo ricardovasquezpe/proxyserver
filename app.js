@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/version', async (req, res) => {
-    res.send({version: 2});
+    res.send({version: 3});
 });
 
 app.post('/', async (req, res) => {
@@ -15,7 +15,7 @@ app.post('/', async (req, res) => {
     res.send(response.data);
 });
 
-app.get('/get', async (req, res) => {
+app.get('/', async (req, res) => {
     var response = await axios.get(req.query.url, {
         headers: req.headers
     });
