@@ -6,6 +6,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.post('/version', async (req, res) => {
+    res.send({version: 2});
+});
+
 app.post('/', async (req, res) => {
     var response = await axios.post(req.query.url, req.body);
     res.send(response.data);
